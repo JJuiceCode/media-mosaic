@@ -52,4 +52,21 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  callbacks: {
+    async jwt({ token }) {
+      // token.picture에 provider 프로필 이미지가 들어오는 케이스가 많음
+      if (typeof token.picture === "string") {
+        token.picture = token.picture.replace(/^http:\/\//, "https://");
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        const candidate = (typeof token.picture === "string" ? token.picture : session.user.image) ?? "";
+
+        session.user.image = candidate ? candidate.replace(/^http:\/\//, "https://") : undefined;
+      }
+      return session;
+    },
+  },
 };
