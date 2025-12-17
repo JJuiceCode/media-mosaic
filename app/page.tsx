@@ -2,9 +2,10 @@ import Image from "next/image";
 import { getServerSession } from "next-auth";
 
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
+import { KakaoSignInButton } from "@/components/auth/kakao-sign-in-button";
+import { NaverSignInButton } from "@/components/auth/naver-sign-in-button";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { authOptions } from "@/lib/auth/options";
-import { NaverSignInButton } from "@/components/auth/naver-sign-in-button";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -20,28 +21,39 @@ export default async function Home() {
         {/* Main Section */}
         <section className="max-w-2xl space-y-6">
           <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
-            Step 1 · Social Login (Google + Naver)
+            Step 1 · Social Login (Google · Naver · Kakao)
           </span>
-          <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">Google · Naver 인증으로 온보딩 속도를 끌어올려.</h1>
+          <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">Google · Naver · Kakao 인증으로 온보딩 속도를 끌어올려.</h1>
           <p className="text-lg text-white/80">
-            사용자에게 익숙한 두 개의 소셜 채널을 모두 제공하여 진입 장벽을 낮추고, 수집한 프로필로 곧바로 맞춤형 피드를 만들 수 있어.
+            세 가지 소셜 채널을 동시에 제공해 진입 장벽을 낮추고, 수집한 프로필 데이터로 바로 맞춤형 경험을 설계할 수 있어.
           </p>
 
           {/* Login Buttons */}
-          <div className="flex flex-col gap-3 sm:flex-row">
-            {session ? (
-              <SignOutButton />
-            ) : (
-              <>
-                <GoogleSignInButton />
-                <NaverSignInButton />
-              </>
-            )}
+          <div className="space-y-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {session ? (
+                <SignOutButton />
+              ) : (
+                <>
+                  <GoogleSignInButton />
+                  <NaverSignInButton />
+                  <KakaoSignInButton />
+                </>
+              )}
+            </div>
+            <a
+              href="https://next-auth.js.org/getting-started/example"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-2xl border border-white/30 px-6 py-3 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:border-white"
+            >
+              Integration guide
+            </a>
           </div>
 
           <p className="text-sm text-white/70">
             {session
-              ? "Access Token이 발급되어 사용자 프로필을 안전하게 공유할 준비가 되었어."
+              ? "Google, Naver, Kakao 중 어떤 채널이든 Access Token이 발급되어 사용자 프로필을 안전하게 공유할 준비가 되었어."
               : "아직 토큰이 없어 사용자 맞춤 데이터를 만들 수 없어."}
           </p>
         </section>
@@ -53,7 +65,7 @@ export default async function Home() {
               <div className="flex items-center gap-4">
                 <div className="relative h-16 w-16 overflow-hidden rounded-full bg-white/10">
                   {session.user.image ? (
-                    <Image src={session.user.image} alt={session.user.name ?? "Signed in user"} layout="fill" className="object-cover" priority />
+                    <Image src={session.user.image} alt={session.user.name ?? "Signed in user"} fill sizes="64px" className="object-cover" priority />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center text-2xl font-semibold text-white">{userInitial}</div>
                   )}
@@ -74,7 +86,7 @@ export default async function Home() {
               <div className="flex items-center gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white">01</span>
                 <div>
-                  <p className="text-white">Google · Naver consent</p>
+                  <p className="text-white">Google · Naver · Kakao consent</p>
                   <p className="text-sm text-white/60">사용자가 익숙한 채널을 선택해 OAuth 동의 화면에서 접근 권한을 허용해.</p>
                 </div>
               </div>
@@ -82,7 +94,9 @@ export default async function Home() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white">02</span>
                 <div>
                   <p className="text-white">Secure callback</p>
-                  <p className="text-sm text-white/60">`/api/auth/callback/google` 또는 `/api/auth/callback/naver`에서 안전하게 토큰을 교환해.</p>
+                  <p className="text-sm text-white/60">
+                    `/api/auth/callback/google`, `/api/auth/callback/naver`, `/api/auth/callback/kakao` 중 연결된 경로에서 안전하게 토큰을 교환해.
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
