@@ -1,7 +1,10 @@
 import type { NextAuthOptions } from "next-auth";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import Google from "next-auth/providers/google";
 import Kakao from "next-auth/providers/kakao";
 import Naver from "next-auth/providers/naver";
+
+import { prisma } from "@/lib/prisma";
 
 const googleClientId = process.env.AUTH_GOOGLE_CLIENT_ID;
 const googleClientSecret = process.env.AUTH_GOOGLE_CLIENT_SECRET;
@@ -28,6 +31,7 @@ if (missingEnv.length) {
 }
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   secret: authSecret,
   providers: [
     Google({
@@ -51,19 +55,13 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: "database",
   },
   callbacks: {
-    async jwt({ token }) {
-      // token.picture에 provider 프로필 이미지가 들어오는 케이스가 많음
-      if (typeof token.picture === "string") {
-        token.picture = token.picture.replace(/^http:\/\//, "https://");
-      }
-      return token;
-    },
-    async session({ session, token }) {
+    async session({ session, token, user }) {
       if (session.user) {
-        const candidate = (typeof token.picture === "string" ? token.picture : session.user.image) ?? "";
+        const candidate =
+          (typeof token?.picture === "string" ? token.picture : user?.image ?? session.user.image) ?? "";
 
         session.user.image = candidate ? candidate.replace(/^http:\/\//, "https://") : undefined;
       }
