@@ -37,12 +37,14 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
+  refresh_token_expires_in  Int?     // ✅ 카카오 톡 에러로 추가
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@index([userId])
 }
+
 
 model Session {
   id           String   @id @default(cuid())
