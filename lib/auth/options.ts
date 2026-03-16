@@ -103,14 +103,27 @@ export const authOptions: NextAuthOptions = {
   secret: authSecret,
   providers,
   session: {
-    strategy: "database",
+    // Credentials Provider를 사용하므로 세션 전략을 JWT로 통일
+    // 소셜 로그인 사용자도 세션은 DB가 아니라 JWT 쿠키로 관리됨
+    strategy: "jwt",
   },
   callbacks: {
-    async session({ session, token, user }) {
+    // JWT 토큰을 생성할 때(로그인 시) 유저 정보를 토큰에 담아줍니다.
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.picture = user.image; // 커스텀 로그인 유저의 이미지 처리
+      }
+      return token;
+    },
+    // 클라이언트(브라우저)에서 세션을 읽을 때 토큰의 정보를 세션 객체로 넘겨줍니다.
+    async session({ session, token }) {
       if (session.user) {
-        const candidate =
-          (typeof token?.picture === "string" ? token.picture : user?.image ?? session.user.image) ?? "";
+        // 토큰에 있는 id를 세션 객체에 넣어줍니다 (선택사항이지만 유용함)
+        session.user.id = token.id ?? "";
 
+        // 이미지 HTTP -> HTTPS 변환 로직
+        const candidate = (typeof token?.picture === "string" ? token.picture : session.user.image) ?? "";
         session.user.image = candidate ? candidate.replace(/^http:\/\//, "https://") : undefined;
       }
       return session;
