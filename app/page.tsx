@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getServerSession } from "next-auth";
 
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
@@ -21,7 +22,7 @@ export default async function Home() {
         {/* Main Section */}
         <section className="max-w-2xl space-y-6">
           <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
-            Step 1 · Social Login (Google · Naver · Kakao)
+            Step 1 · Social + Custom Login
           </span>
           <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">Google · Naver · Kakao 인증으로 온보딩 속도를 끌어올려.</h1>
           <p className="text-lg text-white/80">
@@ -38,6 +39,18 @@ export default async function Home() {
                   <GoogleSignInButton />
                   <NaverSignInButton />
                   <KakaoSignInButton />
+                  <Link
+                    href="/login"
+                    className="inline-flex items-center justify-center rounded-2xl border border-cyan-300/60 px-6 py-3 text-base font-semibold text-cyan-200 transition hover:-translate-y-0.5 hover:border-cyan-200"
+                  >
+                    이메일 로그인
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="inline-flex items-center justify-center rounded-2xl border border-white/30 px-6 py-3 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:border-white"
+                  >
+                    회원가입
+                  </Link>
                 </>
               )}
             </div>
