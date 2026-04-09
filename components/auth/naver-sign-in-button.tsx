@@ -8,7 +8,7 @@ export function NaverSignInButton() {
 
   const handleClick = () => {
     startTransition(async () => {
-      await signIn("naver");
+      await signIn("naver", { callbackUrl: "/dashboard" });
     });
   };
 

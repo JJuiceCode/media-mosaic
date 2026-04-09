@@ -8,7 +8,7 @@ export function GoogleSignInButton() {
 
   const handleClick = () => {
     startTransition(async () => {
-      await signIn("google");
+      await signIn("google", { callbackUrl: "/dashboard" });
     });
   };
 
