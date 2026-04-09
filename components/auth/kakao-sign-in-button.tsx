@@ -8,7 +8,7 @@ export function KakaoSignInButton() {
 
   const handleClick = () => {
     startTransition(async () => {
-      await signIn("kakao");
+      await signIn("kakao", { callbackUrl: "/dashboard" });
     });
   };
 
