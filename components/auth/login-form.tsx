@@ -43,7 +43,7 @@ export function LoginForm() {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="space-y-2">
-        <label htmlFor="email" className="text-sm text-white/80">
+        <label htmlFor="email" className="text-sm text-slate-700 dark:text-white/80">
           이메일
         </label>
         <input
@@ -52,12 +52,12 @@ export function LoginForm() {
           type="email"
           autoComplete="email"
           required
-          className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none ring-cyan-400 transition focus:ring-2"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-cyan-400 transition focus:ring-2 dark:border-white/20 dark:bg-white/5 dark:text-white"
         />
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="password" className="text-sm text-white/80">
+        <label htmlFor="password" className="text-sm text-slate-700 dark:text-white/80">
           비밀번호
         </label>
         <input
@@ -66,7 +66,7 @@ export function LoginForm() {
           type="password"
           autoComplete="current-password"
           required
-          className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none ring-cyan-400 transition focus:ring-2"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-cyan-400 transition focus:ring-2 dark:border-white/20 dark:bg-white/5 dark:text-white"
         />
       </div>
 
@@ -80,7 +80,7 @@ export function LoginForm() {
         {pending ? "로그인 중..." : "로그인"}
       </button>
 
-      <p className="text-sm text-white/70">
+      <p className="text-sm text-slate-600 dark:text-white/70">
         계정이 없나요?{" "}
         <Link href="/signup" className="font-semibold text-cyan-300 hover:text-cyan-200">
           회원가입

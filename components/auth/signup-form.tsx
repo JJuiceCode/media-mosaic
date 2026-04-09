@@ -66,7 +66,7 @@ export function SignupForm() {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="space-y-2">
-        <label htmlFor="name" className="text-sm text-white/80">
+        <label htmlFor="name" className="text-sm text-slate-700 dark:text-white/80">
           이름
         </label>
         <input
@@ -77,12 +77,12 @@ export function SignupForm() {
           required
           minLength={2}
           maxLength={40}
-          className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none ring-cyan-400 transition focus:ring-2"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-cyan-400 transition focus:ring-2 dark:border-white/20 dark:bg-white/5 dark:text-white"
         />
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="email" className="text-sm text-white/80">
+        <label htmlFor="email" className="text-sm text-slate-700 dark:text-white/80">
           이메일
         </label>
         <input
@@ -91,12 +91,12 @@ export function SignupForm() {
           type="email"
           autoComplete="email"
           required
-          className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none ring-cyan-400 transition focus:ring-2"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-cyan-400 transition focus:ring-2 dark:border-white/20 dark:bg-white/5 dark:text-white"
         />
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="password" className="text-sm text-white/80">
+        <label htmlFor="password" className="text-sm text-slate-700 dark:text-white/80">
           비밀번호
         </label>
         <input
@@ -107,12 +107,12 @@ export function SignupForm() {
           required
           minLength={10}
           maxLength={128}
-          className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none ring-cyan-400 transition focus:ring-2"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-cyan-400 transition focus:ring-2 dark:border-white/20 dark:bg-white/5 dark:text-white"
         />
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="passwordConfirm" className="text-sm text-white/80">
+        <label htmlFor="passwordConfirm" className="text-sm text-slate-700 dark:text-white/80">
           비밀번호 확인
         </label>
         <input
@@ -123,7 +123,7 @@ export function SignupForm() {
           required
           minLength={10}
           maxLength={128}
-          className="w-full rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white outline-none ring-cyan-400 transition focus:ring-2"
+          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-cyan-400 transition focus:ring-2 dark:border-white/20 dark:bg-white/5 dark:text-white"
         />
       </div>
 
@@ -138,7 +138,7 @@ export function SignupForm() {
         {pending ? "가입 중..." : "회원가입"}
       </button>
 
-      <p className="text-sm text-white/70">
+      <p className="text-sm text-slate-600 dark:text-white/70">
         이미 계정이 있나요?{" "}
         <Link href="/login" className="font-semibold text-cyan-300 hover:text-cyan-200">
           로그인
