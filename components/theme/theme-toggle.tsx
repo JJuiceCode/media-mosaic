@@ -19,7 +19,7 @@ export function ThemeToggle() {
       {/* 아이콘 부분만 클라이언트에서 결정되도록 하고, 
         초기 렌더링 시에는 서버에서 그린 것과 달라도 에러를 내지 않습니다. 
       */}
-      {currentTheme ? isDark ? <SunIcon /> : <MoonIcon /> : <span className="h-5 w-5 animate-pulse rounded-full bg-zinc-300 dark:bg-zinc-600" />}
+      {currentTheme ? isDark ? <SunIcon /> : <MoonIcon /> : <span className="h-5 w-5 animate-pulse rounded-full bg-accent-soft" />}
     </button>
   );
 }
