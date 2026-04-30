@@ -20,7 +20,7 @@ export function Header() {
 
         <div className="flex items-center justify-between gap-3 sm:justify-end">
           <nav aria-label="기본 메뉴" className="flex flex-wrap items-center gap-1 text-sm">
-            {menuItems.map((item) => (
+            {menuItems.map(item => (
               <Link
                 key={item.href}
                 href={item.href}

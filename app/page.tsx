@@ -1,11 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 
-import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
-import { KakaoSignInButton } from "@/components/auth/kakao-sign-in-button";
-import { NaverSignInButton } from "@/components/auth/naver-sign-in-button";
-import { SignOutButton } from "@/components/auth/sign-out-button";
 import { authOptions } from "@/lib/auth/options";
 
 export default async function Home() {
@@ -30,41 +25,6 @@ export default async function Home() {
           <p className="text-lg text-muted">
             세 가지 소셜 채널을 동시에 제공해 진입 장벽을 낮추고, 수집한 프로필 데이터로 바로 맞춤형 경험을 설계할 수 있어.
           </p>
-
-          {/* Login Buttons */}
-          <div className="space-y-3">
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              {session ? (
-                <SignOutButton />
-              ) : (
-                <>
-                  <GoogleSignInButton />
-                  <NaverSignInButton />
-                  <KakaoSignInButton />
-                  <Link
-                    href="/login"
-                    className="inline-flex items-center justify-center rounded-2xl border border-accent/60 px-6 py-3 text-base font-semibold text-accent transition hover:-translate-y-0.5 hover:border-accent-dark hover:bg-accent-soft"
-                  >
-                    이메일 로그인
-                  </Link>
-                  <Link
-                    href="/signup"
-                    className="inline-flex items-center justify-center rounded-2xl border border-border px-6 py-3 text-base font-semibold text-foreground transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent-soft"
-                  >
-                    회원가입
-                  </Link>
-                </>
-              )}
-            </div>
-            <a
-              href="https://next-auth.js.org/getting-started/example"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-2xl border border-border px-6 py-3 text-base font-semibold text-foreground transition hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent-soft"
-            >
-              Integration guide
-            </a>
-          </div>
 
           <p className="text-sm text-muted">
             {session
