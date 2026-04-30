@@ -1,9 +1,15 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useSyncExternalStore } from "react";
+
+const subscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 export function ThemeToggle() {
   const { theme, systemTheme, setTheme } = useTheme();
+  const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
   const currentTheme = theme === "system" ? systemTheme : theme;
   const isDark = currentTheme === "dark";
 
@@ -12,14 +18,9 @@ export function ThemeToggle() {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label="테마 변경"
-      // ❗ 하이드레이션 경고를 무시하도록 설정 (속성값 차이 허용)
-      suppressHydrationWarning
       className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-foreground transition hover:border-accent/40 hover:text-accent"
     >
-      {/* 아이콘 부분만 클라이언트에서 결정되도록 하고, 
-        초기 렌더링 시에는 서버에서 그린 것과 달라도 에러를 내지 않습니다. 
-      */}
-      {currentTheme ? isDark ? <SunIcon /> : <MoonIcon /> : <span className="h-5 w-5 animate-pulse rounded-full bg-accent-soft" />}
+      {mounted && currentTheme ? isDark ? <SunIcon /> : <MoonIcon /> : <span className="h-5 w-5 animate-pulse rounded-full bg-accent-soft" />}
     </button>
   );
 }

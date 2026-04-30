@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Header } from "@/components/layout/header";
 import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
@@ -14,8 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={"font-sans min-h-screen antialiased"}>
-        <Providers>{children}</Providers>
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );
