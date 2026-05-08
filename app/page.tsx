@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth/options";
+import { normalizeImageUrl } from "@/lib/normalize-image-url";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -40,7 +41,14 @@ export default async function Home() {
               <div className="flex items-center gap-4">
                 <div className="relative h-16 w-16 overflow-hidden rounded-full bg-accent-soft">
                   {session.user.image ? (
-                    <Image src={session.user.image} alt={session.user.name ?? "Signed in user"} fill sizes="64px" className="object-cover" priority />
+                    <Image
+                      src={normalizeImageUrl(session.user.image)}
+                      alt={session.user.name ?? "Signed in user"}
+                      fill
+                      sizes="64px"
+                      className="object-cover"
+                      priority
+                    />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center text-2xl font-semibold text-foreground">{userInitial}</div>
                   )}
