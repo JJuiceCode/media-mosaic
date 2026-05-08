@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { ProfileEditForm } from "@/components/dashboard/profile-edit-form";
 import { authOptions } from "@/lib/auth/options";
+import { normalizeImageUrl } from "@/lib/normalize-image-url";
 import { prisma } from "@/lib/prisma";
 
 function formatDate(value: Date) {
@@ -127,7 +128,13 @@ export default async function DashboardPage() {
             <div className="mt-5 flex items-center gap-4 rounded-2xl border border-border bg-accent-soft p-4">
               <div className="relative h-16 w-16 overflow-hidden rounded-full bg-surface">
                 {dashboardUser.image ? (
-                  <Image src={dashboardUser.image} alt={dashboardUser.name ?? "User profile image"} fill sizes="64px" className="object-cover" />
+                  <Image
+                    src={normalizeImageUrl(dashboardUser.image)}
+                    alt={dashboardUser.name ?? "User profile image"}
+                    fill
+                    sizes="64px"
+                    className="object-cover"
+                  />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-2xl font-semibold text-foreground">{userInitial}</div>
                 )}
