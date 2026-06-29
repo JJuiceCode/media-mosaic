@@ -4,8 +4,8 @@ import { Header } from "@/components/layout/header";
 import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
-  title: "Media Mosaic 좋거나 혹은 나쁘거나나",
-  description: "좋은사람 나쁜사람을 구분하기 위해 당신의 힘이 필요합니다",
+  title: "MeMo | 공적 인물 기록 아카이브",
+  description: "공적 인물의 발언, 기사, 논란, 반론, 정정 이력을 출처 기반으로 정리하는 시민용 기록 아카이브입니다.",
 };
 
 export default function RootLayout({

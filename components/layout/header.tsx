@@ -4,9 +4,9 @@ import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 const menuItems = [
   { href: "/", label: "홈" },
-  { href: "/dashboard", label: "대시보드" },
+  { href: "/#featured-people", label: "인물 기록" },
+  { href: "/#participation", label: "검증 요청" },
   { href: "/login", label: "로그인" },
-  { href: "/signup", label: "회원가입" },
 ];
 
 export function Header() {
@@ -14,8 +14,8 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-border bg-surface/95 text-foreground backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
         <Link href="/" className="group inline-flex w-fit flex-col">
-          <span className="text-lg font-semibold tracking-tight transition group-hover:text-accent">Media Mosaic</span>
-          <span className="text-xs text-muted">좋거나 혹은 나쁘거나</span>
+          <span className="text-lg font-semibold tracking-tight transition group-hover:text-accent">MeMo</span>
+          <span className="text-xs text-muted">Public Record Archive</span>
         </Link>
 
         <div className="flex items-center justify-between gap-3 sm:justify-end">
